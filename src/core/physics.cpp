@@ -85,3 +85,68 @@ bool isDirectlyConnected(int fromF, int fromR, int toF, int toR,
 
     return false;
 }
+bool canTraverse(int targetFloor, int targetRoom, char connType,
+                const char inventory[MAX_INVENTORY_CAPACITY],
+                int inventoryCount,
+                int emergencyTripsLeft,
+                bool lift2Operational){
+    if (targetFloor < 1 || targetFloor > NUM_FLOORS ||
+        targetRoom < 1 || targetRoom > ROOMS_PER_FLOOR)
+    {
+        return false;
+    }
+
+    if (connType == CONN_DOOR || connType == CONN_WINDOW)
+    {
+        return true;
+    }
+
+    if (connType == 'S')
+    {
+        if (targetRoom == 1)
+            return true;
+    }
+
+    if (connType == '1')
+    {
+        if ((targetFloor == 1 || targetFloor == 2) &&
+            (targetRoom == 2 || targetRoom == 3))
+        {
+            return true;
+        }
+    }
+
+        if (connType == CONN_LOCKED_DOOR)
+    {
+        if (hasItem(inventory, inventoryCount, ENT_MASTER_KEY))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    if (connType == '2')
+    {
+        if (lift2Operational &&
+            hasItem(inventory, inventoryCount, ENT_LIFT_PASS))
+        {
+            if (targetRoom == 4 &&
+                (targetFloor == 2 || targetFloor == 4 ||
+                 targetFloor == 5))
+            {
+                return true;
+            }
+        }
+        if (emergencyTripsLeft > 0 &&
+            hasItem(inventory, inventoryCount, ENT_EMERGENCY_CARD))
+        {
+            if (targetRoom == 4 &&
+                (targetFloor == 2 || targetFloor == 4 ||
+                 targetFloor == 5))
+            {
+                return true;
+            }
+        } return false;
+    } return false;
+}
