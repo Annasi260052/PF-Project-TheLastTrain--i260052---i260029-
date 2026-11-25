@@ -4,6 +4,10 @@
 #include "config.h"
 
 // Connection Type Constants (Stored in char or int 2D matrices)
+
+const char CONN_STAIRS = 'S'; // Staircase
+const char CONN_LIFT1  = 'A'; // Lift 1
+const char CONN_LIFT2  = 'B';
 const char CONN_NONE        = ' ';
 const char CONN_DOOR        = 'D'; // Ordinary door
 const char CONN_WINDOW      = 'W'; // Window traversal
