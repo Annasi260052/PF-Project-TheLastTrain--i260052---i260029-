@@ -101,13 +101,13 @@ bool canTraverse(int targetFloor, int targetRoom, char connType,
         return true;
     }
 
-    if (connType == 'S')
+    if (connType == CONN_STAIRS)
     {
         if (targetRoom == 1)
             return true;
     }
 
-    if (connType == '1')
+    if (connType == CONN_LIFT1)
     {
         if ((targetFloor == 1 || targetFloor == 2) &&
             (targetRoom == 2 || targetRoom == 3))
@@ -126,7 +126,7 @@ bool canTraverse(int targetFloor, int targetRoom, char connType,
         return false;
     }
 
-    if (connType == '2')
+    if (connType == CONN_LIFT2)
     {
         if (lift2Operational &&
             hasItem(inventory, inventoryCount, ENT_LIFT_PASS))
